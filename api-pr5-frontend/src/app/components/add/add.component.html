@@ -1,0 +1,46 @@
+<div>
+    <div class="submit-form">
+      <div *ngIf="!submitted">
+        <div class="form-group">
+          <label for="username">ФИО</label>
+          <input
+            type="text"
+            class="form-control"
+            id="username"
+            required
+            [(ngModel)]="phone.username"
+            name="username"
+          />
+        </div>
+  
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input
+            class="form-control"
+            id="email"
+            required
+            [(ngModel)]="phone.email"
+            name="email"
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="mobile">Номер телефона</label>
+          <input
+            class="form-control"
+            id="mobile"
+            required
+            [(ngModel)]="phone.mobile"
+            name="mobile"
+          />
+        </div>
+  
+        <button (click)="savePhone()" class="btn btn-success">Отправить</button>
+      </div>
+  
+      <div *ngIf="submitted">
+        <h4>Запись успешно создана!</h4>
+        <button class="btn btn-success" (click)="newPhone()">Добавить</button>
+      </div>
+    </div>
+  </div>

@@ -1,0 +1,74 @@
+<div *ngIf="viewMode; else editable">
+  <div *ngIf="currentPhone.id">
+    <h4>Запись</h4>
+    <div>
+      <label><strong>ФИО:</strong></label> {{ currentPhone.username }}
+    </div>
+    <div>
+      <label><strong>Email:</strong></label>
+      {{ currentPhone.email }}
+    </div>
+    <div>
+      <label><strong>Номер телефона:</strong></label>
+      {{ currentPhone.mobile }}
+    </div>
+    <div>
+      <label><strong>Статус:</strong></label>
+      {{ currentPhone.published ? "Published" : "Pending" }}
+    </div>
+
+    <a class="badge badge-warning" routerLink="/phones/{{ currentPhone.id }}">
+      Редактировать
+    </a>
+  </div>
+
+  <div *ngIf="!currentPhone">
+    <br />
+    <p>Пожалуйста, нажмите на запись</p>
+  </div>
+</div>
+
+<ng-template #editable>
+  <div *ngIf="currentPhone.id" class="edit-form">
+    <h4>Запись</h4>
+    <form>
+      <div class="form-group">
+        <label for="username">ФИО</label>
+        <input type="text" class="form-control" id="username" required [(ngModel)]="currentPhone.username"
+          name="username" />
+      </div>
+
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input class="form-control" id="email" required [(ngModel)]="currentPhone.email" name="email" />
+      </div>
+
+      <div class="form-group">
+        <label for="mobile">Mobile</label>
+        <input class="form-control" id="mobile" required [(ngModel)]="currentPhone.mobile" name="mobile" />
+      </div>
+
+      <div class="form-group">
+        <label><strong>Статус:</strong></label>
+        {{ currentPhone.published ? "Published" : "Pending" }}
+      </div>
+    </form>
+
+    <button class="badge badge-primary mr-2" *ngIf="currentPhone.published" (click)="updatePublished(false)">
+      Отмена
+    </button>
+    <button *ngIf="!currentPhone.published" class="badge badge-primary mr-2" (click)="updatePublished(true)">
+      Опубликовать
+    </button>
+
+    <button class="badge badge-danger mr-2" (click)="deletePhone()">
+      Удалить
+    </button>
+
+    <button type="submit" class="badge badge-success mb-2" (click)="updatePhone()">
+      Обновить
+    </button>
+    <p>{{ message }}</p>
+  </div>
+
+</ng-template>
